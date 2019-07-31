@@ -1,3 +1,3 @@
 web: bundle exec ruby web/iqdbs.rb
-iqdb: iqdb listen2 127.0.0.1:4000 /Users/ayi/Development/iqdbs/tmp/iqdb.db
-sqs: RUN=1 bundle exec ruby services/sqs_processor.rb --pidfile=/Users/ayi/Development/iqdbs/tmp/sqs.pid --logfile=stdout
+sidekiq: bundle exec sidekiq -c 2 -r ./services/sidekiq_processor.rb -q iqdb
+iqdb: iqdb listen2 127.0.0.1:62126 /home/vagrant/iqdbs/e621.db
