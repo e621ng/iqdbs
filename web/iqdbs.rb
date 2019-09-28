@@ -44,21 +44,13 @@ search = lambda do
       results = server.download_and_query(url, ref, 3)
     end
 
-    if params["callback"]
-      data = results.to_json
-      url = URI.parse(params["callback"])
-      url.query = URI.encode_www_form({matches: data})
-      redirect url.to_s
-    else
-      content_type :json
-      results.to_json
-    end
-
+    content_type :json
+    results.to_json
   rescue Iqdb::Responses::Error => e
     content_type :json
     JSON.generate({"error" => e.to_s})
   end
-end 
+end
 
 get "/favicon.ico" do
   204
