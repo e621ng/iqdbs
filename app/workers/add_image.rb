@@ -6,6 +6,15 @@ class IqdbUpdateJob
   def perform(post_id, thumbnail_url)
     server = Iqdb::Server.new(ENV["IQDB_HOSTNAME"], ENV["IQDB_PORT"])
     command = Iqdb::Command.new(ENV["IQDB_DATABASE_FILE"])
+
+    if thumbnail_url[0..3] == "md5:"
+      md5 = thumbnail_url[4..-1]
+      path = "#{ENV["IMAGES_FOLDER"]}/preview/#{md5[0..1]}/#{md5[2..3]}/#{md5}"
+      server.add(post_id, path)
+      command.add(post_id, path)
+      return
+    end
+
     url_hash = CityHash.hash64(thumbnail_url).to_s(36)
     url = URI.parse(thumbnail_url)
 
