@@ -46,14 +46,6 @@ search = lambda do
   end
 end
 
-get "/favicon.ico" do
-  204
-end
-
 post "/similar", &search
 
 get "/similar", &search
-
-get "/" do
-	redirect "/index.html"
-end
