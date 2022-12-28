@@ -1,4 +1,3 @@
-require 'cityhash'
 require 'net/http'
 
 module Iqdb
@@ -44,7 +43,6 @@ module Iqdb
     end
 
     def download(image_url, ref = nil)
-      url_hash = CityHash.hash64(image_url).to_s(36)
       url = URI.parse(image_url)
       ret = nil
       headers = {
@@ -54,7 +52,7 @@ module Iqdb
         headers["Referer"] = ref
       end
 
-      Tempfile.open("iqdbs-#{url_hash}") do |f|
+      Tempfile.open("iqdbs") do |f|
         Net::HTTP.start(url.host, url.port, :use_ssl => url.is_a?(URI::HTTPS)) do |http|
           http.request_get(url.request_uri, headers) do |res|
             ret = yield(f, res)

@@ -15,10 +15,9 @@ class IqdbUpdateJob
       return
     end
 
-    url_hash = CityHash.hash64(thumbnail_url).to_s(36)
     url = URI.parse(thumbnail_url)
 
-    Tempfile.open("iqdbs-#{url_hash}") do |f|
+    Tempfile.open("iqdbs") do |f|
       Net::HTTP.start(url.host, url.port, :use_ssl => url.is_a?(URI::HTTPS)) do |http|
         http.request_get(url.to_s) do |res|
           if res.is_a?(Net::HTTPSuccess)
