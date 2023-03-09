@@ -13,12 +13,6 @@ require "iqdb/command"
 
 set :port, ENV["SINATRA_PORT"]
 
-# before "/similar" do
-#   if params["key"] != ENV["AUTH_KEY"]
-#     halt 401
-#   end
-# end
-
 def find_referer(url)
   if url =~  /\Ahttps?:\/\/(?:\w+\.)?pixiv\.net/ || url =~ /\Ahttps?:\/\/i\.pximg\.net/
     return "https://www.pixiv.net"
@@ -52,14 +46,6 @@ search = lambda do
   end
 end
 
-get "/favicon.ico" do
-  204
-end
-
 post "/similar", &search
 
 get "/similar", &search
-
-get "/" do
-	redirect "/index.html"
-end
