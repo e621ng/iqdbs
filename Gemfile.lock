@@ -3,11 +3,13 @@ GEM
   specs:
     connection_pool (2.3.0)
     dotenv (2.8.1)
+    kgio (2.11.4)
     mustermann (3.0.0)
       ruby2_keywords (~> 0.0.1)
     rack (2.2.6.3)
     rack-protection (3.0.5)
       rack
+    raindrops (0.20.1)
     redis (4.8.1)
     ruby2_keywords (0.0.5)
     sidekiq (6.5.8)
@@ -20,6 +22,9 @@ GEM
       rack-protection (= 3.0.5)
       tilt (~> 2.0)
     tilt (2.1.0)
+    unicorn (6.1.0)
+      kgio (~> 2.6)
+      raindrops (~> 0.7)
     webrick (1.8.1)
 
 PLATFORMS
@@ -30,6 +35,7 @@ DEPENDENCIES
   dotenv
   sidekiq (~> 6.0)
   sinatra
+  unicorn
   webrick
 
 BUNDLED WITH

@@ -9,7 +9,6 @@ require "iqdb/responses/collection"
 require "iqdb/responses/error"
 require "iqdb/responses/responses"
 require "iqdb/server"
-require "iqdb/command"
 
 set :port, ENV["SINATRA_PORT"]
 

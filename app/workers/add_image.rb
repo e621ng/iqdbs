@@ -10,6 +10,10 @@ class IqdbUpdateJob
     if thumbnail_url[0..3] == "md5:"
       md5 = thumbnail_url[4..-1]
       path = "#{ENV["IMAGES_FOLDER"]}/preview/#{md5[0..1]}/#{md5[2..3]}/#{md5}"
+      unless File.exist?(path)
+        path = "#{ENV["IMAGES_FOLDER"]}/deleted/preview/#{md5[0..1]}/#{md5[2..3]}/#{md5}"
+        return unless File.exist?(path)
+      end
       server.add(post_id, path)
       command.add(post_id, path)
       return
